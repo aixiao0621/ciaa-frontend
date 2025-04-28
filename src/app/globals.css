@@ -1,8 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Material Design 3 Light Theme Colors */
+  --background: #f8f9fa;
+  --foreground: #1f1f1f;
+  --card-bg: #ffffff;
+  --card-border: #e0e0e0;
+  --surface: #ffffff;
+  --surface-variant: #f3f3f3;
+
+  /* Primary colors */
+  --primary: #6750a4;
+  --primary-hover: #7965b5;
+  --on-primary: #ffffff;
+
+  /* Secondary colors */
+  --secondary: #625b71;
+  --secondary-hover: #7a7289;
+  --on-secondary: #ffffff;
+
+  /* Tertiary colors */
+  --tertiary: #7d5260;
+  --tertiary-hover: #8e6370;
+  --on-tertiary: #ffffff;
+
+  /* Error colors */
+  --error: #b3261e;
+  --error-hover: #c4362e;
+  --on-error: #ffffff;
+
+  /* Neutral colors */
+  --neutral-50: #fafafa;
+  --neutral-100: #f5f5f5;
+  --neutral-200: #e5e5e5;
+  --neutral-300: #d4d4d4;
+  --neutral-400: #a3a3a3;
+  --neutral-500: #737373;
+  --neutral-600: #525252;
+  --neutral-700: #404040;
+  --neutral-800: #262626;
+  --neutral-900: #171717;
+
+  /* Other colors */
+  --success: #386a20;
+  --warning: #b86e00;
+  --info: #0061a4;
+  --muted: #79747e;
+  --highlight: #eaddff;
 }
 
 @theme inline {
@@ -14,13 +58,115 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Material Design 3 Dark Theme Colors */
+    --background: #1a1c1e;
+    --foreground: #e3e3e3;
+    --card-bg: #2b2b2b;
+    --card-border: #3a3a3a;
+    --surface: #121212;
+    --surface-variant: #2e2e2e;
+
+    /* Primary colors */
+    --primary: #d0bcff;
+    --primary-hover: #e9ddff;
+    --on-primary: #381e72;
+
+    /* Secondary colors */
+    --secondary: #ccc2dc;
+    --secondary-hover: #e8def8;
+    --on-secondary: #332d41;
+
+    /* Tertiary colors */
+    --tertiary: #efb8c8;
+    --tertiary-hover: #ffd8e4;
+    --on-tertiary: #492532;
+
+    /* Error colors */
+    --error: #f2b8b5;
+    --error-hover: #ffdad6;
+    --on-error: #601410;
+
+    /* Neutral colors */
+    --neutral-50: #1a1a1a;
+    --neutral-100: #262626;
+    --neutral-200: #333333;
+    --neutral-300: #404040;
+    --neutral-400: #737373;
+    --neutral-500: #999999;
+    --neutral-600: #bfbfbf;
+    --neutral-700: #d9d9d9;
+    --neutral-800: #e6e6e6;
+    --neutral-900: #f2f2f2;
+
+    /* Other colors */
+    --success: #9cd67d;
+    --warning: #ffb77c;
+    --info: #9ecaff;
+    --muted: #cac4d0;
+    --highlight: #4a4458;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Roboto', 'Segoe UI', Arial, sans-serif;
+  min-height: 100vh;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Material Design 3 specific styles */
+.md3-elevation-1 {
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.12), 0px 1px 2px 0px rgba(0, 0, 0, 0.14);
+}
+
+.md3-elevation-2 {
+  box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+}
+
+.md3-elevation-3 {
+  box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode overrides for components */
+@media (prefers-color-scheme: dark) {
+  .bg-white {
+    background-color: var(--card-bg) !important;
+  }
+
+  .bg-gray-50 {
+    background-color: var(--surface-variant) !important;
+  }
+
+  .bg-gray-100, .bg-gray-200 {
+    background-color: var(--neutral-200) !important;
+  }
+
+  .text-gray-600, .text-gray-700, .text-gray-800, .text-gray-900 {
+    color: var(--neutral-700) !important;
+  }
+
+  .text-gray-500 {
+    color: var(--muted) !important;
+  }
+
+  .border-gray-100, .border-gray-200, .border-gray-300 {
+    border-color: var(--card-border) !important;
+  }
+
+  .shadow-md {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3) !important;
+  }
+
+  .md3-elevation-1 {
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.5), 0px 1px 2px 0px rgba(0, 0, 0, 0.6);
+  }
+
+  .md3-elevation-2 {
+    box-shadow: 0px 2px 6px 2px rgba(0, 0, 0, 0.6), 0px 1px 2px 0px rgba(0, 0, 0, 0.7);
+  }
+
+  .md3-elevation-3 {
+    box-shadow: 0px 4px 8px 3px rgba(0, 0, 0, 0.6), 0px 1px 3px 0px rgba(0, 0, 0, 0.7);
+  }
 }
