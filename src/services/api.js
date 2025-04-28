@@ -1,5 +1,5 @@
 // Base API configuration
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ciaa-backend.vercel.app';
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://ciaa-backend.vercel.app/api';
 
 // Helper function for handling API responses
 const handleResponse = async (response) => {
