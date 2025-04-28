@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Chromium Issues A² (Chromium Issues Auto Analysis)
+
+<div align="center">
+  <img src="src/app/favicon.ico" alt="CIAA Logo" width="100" height="100">
+  <h3>Chromium Issues A²</h3>
+  <p>A modern web application for visualizing and analyzing Chromium security issues</p>
+</div>
+
+## Overview
+
+ Chromium Issues A² is a web application designed to help security researchers, developers, and analysts visualize and explore Chromium security issues data. The application provides an intuitive interface for searching, filtering, and analyzing security vulnerabilities in the Chromium browser.
+
+## Features
+
+- **Dashboard**: Get a quick overview of security issues with statistics and visualizations
+- **Search Functionality**: Search by CVE ID, issue ID, component, version, and vulnerability type
+- **Advanced Filtering**: Filter issues by severity, priority, status, component, OS, and vulnerability type
+- **Detailed Analysis**: View comprehensive details about each security issue
+
+## Technology Stack
+
+- **Frontend**: Next.js 15 with Turbopack, React, and Tailwind CSS
+- **Backend**: FastAPI with Python
+- **UI Design**: Material Design 3 principles
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js 18.0 or higher
+- npm or yarn
+- Python 3.8 or higher (for backend)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/ciaa-frontend.git
+   cd ciaa-frontend
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
 
-## Learn More
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser to see the application.
