@@ -7,6 +7,80 @@ import RecentIssueCard from '../components/RecentIssueCard';
 import issueService from '../services/issueService';
 import analysisService from '../services/analysisService';
 
+// Mock data for fallback
+const MOCK_STATISTICS = {
+  totalIssues: 1245,
+  criticalIssues: 156, // CVE count
+  highIssues: 723,     // Fixed issues count
+  recentlyAddedIssues: 24,
+  topComponents: [
+    { name: 'Blink', count: 187 },
+    { name: 'V8', count: 156 },
+    { name: 'UI', count: 124 },
+    { name: 'Security', count: 98 },
+    { name: 'Network', count: 76 }
+  ],
+  topVulnerabilityTypes: [
+    { type: 'Use-After-Free', count: 143 },
+    { type: 'Buffer Overflow', count: 112 },
+    { type: 'Type Confusion', count: 87 },
+    { type: 'Memory Corruption', count: 76 },
+    { type: 'Cross-Site Scripting', count: 54 }
+  ],
+  recentIssues: [
+    {
+      id: 1,
+      issue_id: 1234567,
+      title: "Use-after-free in V8",
+      severity: "High",
+      status: "Fixed",
+      component: "V8",
+      cve_id: "CVE-2023-1234",
+      public_time: "2023-05-15T10:30:00Z"
+    },
+    {
+      id: 2,
+      issue_id: 1234568,
+      title: "Buffer overflow in PDF renderer",
+      severity: "Critical",
+      status: "Fixed",
+      component: "PDF",
+      cve_id: "CVE-2023-5678",
+      public_time: "2023-05-14T14:45:00Z"
+    },
+    {
+      id: 3,
+      issue_id: 1234569,
+      title: "Type confusion in JavaScript engine",
+      severity: "High",
+      status: "Assigned",
+      component: "JavaScript",
+      cve_id: "CVE-2023-9012",
+      public_time: "2023-05-13T09:15:00Z"
+    },
+    {
+      id: 4,
+      issue_id: 1234570,
+      title: "Cross-site scripting in Extensions",
+      severity: "Medium",
+      status: "New",
+      component: "Extensions",
+      cve_id: null,
+      public_time: "2023-05-12T16:20:00Z"
+    },
+    {
+      id: 5,
+      issue_id: 1234571,
+      title: "Memory corruption in Media",
+      severity: "High",
+      status: "Verified",
+      component: "Media",
+      cve_id: "CVE-2023-3456",
+      public_time: "2023-05-11T11:10:00Z"
+    }
+  ]
+}
+
 export default function Home() {
   const [statistics, setStatistics] = useState({
     totalIssues: 0,
@@ -20,73 +94,6 @@ export default function Home() {
   });
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-
-  // Mock data for fallback
-  const mockStatistics = {
-    totalIssues: 1245,
-    criticalIssues: 156, // CVE count
-    highIssues: 723,     // Fixed issues count
-    recentlyAddedIssues: 24,
-    topComponents: [
-      { name: 'Blink', count: 187 },
-      { name: 'V8', count: 156 },
-      { name: 'UI', count: 124 },
-      { name: 'Security', count: 98 },
-      { name: 'Network', count: 76 }
-    ],
-    topVulnerabilityTypes: [
-      { type: 'Use-After-Free', count: 143 },
-      { type: 'Buffer Overflow', count: 112 },
-      { type: 'Type Confusion', count: 87 },
-      { type: 'Memory Corruption', count: 76 },
-      { type: 'Cross-Site Scripting', count: 54 }
-    ],
-    recentIssues: [
-      {
-        id: 1,
-        issue_id: 1234567,
-        cve_id: 'CVE-2023-1234',
-        title: 'Use-after-free vulnerability in Blink rendering engine',
-        severity: 'Critical',
-        public_time: '2023-05-15T10:30:00Z',
-        component_tags: [{ tag: 'Blink' }, { tag: 'Rendering' }]
-      },
-      {
-        id: 2,
-        issue_id: 1234568,
-        cve_id: 'CVE-2023-5678',
-        title: 'Buffer overflow in V8 JavaScript engine',
-        severity: 'High',
-        public_time: '2023-06-20T14:45:00Z',
-        component_tags: [{ tag: 'V8' }, { tag: 'JavaScript' }]
-      },
-      {
-        id: 3,
-        issue_id: 1234569,
-        title: 'Type confusion in WebRTC implementation',
-        severity: 'Medium',
-        public_time: '2023-07-10T09:15:00Z',
-        component_tags: [{ tag: 'WebRTC' }, { tag: 'Media' }]
-      },
-      {
-        id: 4,
-        issue_id: 1234570,
-        cve_id: 'CVE-2023-9012',
-        title: 'Cross-site scripting vulnerability in Chrome Extensions',
-        severity: 'High',
-        public_time: '2023-08-05T16:20:00Z',
-        component_tags: [{ tag: 'Extensions' }, { tag: 'Security' }]
-      },
-      {
-        id: 5,
-        issue_id: 1234571,
-        title: 'Memory corruption in PDF renderer',
-        severity: 'Medium',
-        public_time: '2023-09-12T11:30:00Z',
-        component_tags: [{ tag: 'PDF' }, { tag: 'Rendering' }]
-      }
-    ]
-  };
 
   // Fetch real data from the API
   useEffect(() => {
@@ -240,13 +247,13 @@ export default function Home() {
         } else {
           // If data is invalid, use mock data
           console.warn('Invalid data received from API, using mock data');
-          setStatistics(mockStatistics);
+          setStatistics(MOCK_STATISTICS);
           setError('Warning: Using mock data. Backend API may not be fully implemented.');
         }
       } catch (err) {
         console.error('Error fetching dashboard data:', err);
         // Use mock data as fallback
-        setStatistics(mockStatistics);
+        setStatistics(MOCK_STATISTICS);
         setError('Failed to connect to backend API. Using mock data instead.');
       } finally {
         setIsLoading(false);
